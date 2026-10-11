@@ -1,0 +1,47 @@
+name: API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Target environment (config/<env>.properties)"
+        default: "qa"
+      suite:
+        description: "Suite file"
+        default: "src/test/resources/suites/regression.xml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 27
+          cache: maven
+
+      - name: Run API tests
+        # Secrets are mapped by name: AUTH_PASSWORD -> auth.password (see ConfigManager)
+        # env:
+        #   AUTH_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
+        run: >
+          mvn -B clean test
+          -Denv=${{ github.event.inputs.env || 'qa' }}
+          -DsuiteXmlFile=${{ github.event.inputs.suite || 'src/test/resources/suites/regression.xml' }}
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn -B allure:report
+
+      - name: Upload Allure results and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure
+          path: |
+            target/allure-results
+            target/site/allure-maven-plugin

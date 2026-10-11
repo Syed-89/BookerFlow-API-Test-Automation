@@ -1,0 +1,20 @@
+[
+  {
+    "name": "missing firstname",
+    "payload": {
+      "lastname": "Brown", "totalprice": 111, "depositpaid": true,
+      "bookingdates": { "checkin": "2026-12-01", "checkout": "2026-12-02" }
+    },
+    "expectedStatus": 500
+  },
+  {
+    "name": "missing booking dates",
+    "payload": { "firstname": "Jim", "lastname": "Brown", "totalprice": 111, "depositpaid": true },
+    "expectedStatus": 500
+  },
+  {
+    "name": "empty payload",
+    "payload": {},
+    "expectedStatus": 500
+  }
+]
