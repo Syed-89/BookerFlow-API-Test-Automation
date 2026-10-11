@@ -1,4 +1,4 @@
-# Restful Booker API Test Automation Framework
+# Booker API Test Automation Framework
 
 A Java-based API test automation framework for validating Restful Booker-style endpoints using REST Assured, TestNG, and Allure.
 
