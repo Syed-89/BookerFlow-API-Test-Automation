@@ -165,3 +165,10 @@ It keeps booking data in memory during the test run and resets after the suite c
 ## Important note
 
 This framework is designed for stable local automation runs. It uses a local mock API to keep tests deterministic and independent from any external shared service.
+
+## Reports
+
+<img width="1333" height="629" alt="image" src="https://github.com/user-attachments/assets/766776fb-cc09-47f6-99df-cfd17154dc04" />
+<img width="1345" height="616" alt="image" src="https://github.com/user-attachments/assets/7a3d1093-243a-4aaf-8a12-bc198eedcbf5" />
+
+
